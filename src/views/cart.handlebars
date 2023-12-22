@@ -1,0 +1,18 @@
+<h2>Carrito: {{cartFound._id}}</h2>
+<h3>Tus Productos:</h3>
+<table>
+    <tr>
+        <th>Producto</th>
+        <th>ID del Producto</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+    </tr>
+    {{#each cartFound.products}}
+    <tr>
+        <th>{{this.product.title}}</th>
+        <th>{{this.product._id}}</th>
+        <th>{{this.quantity}}</th>
+        <th>{{this.product.price}}</th>
+    </tr>
+    {{/each}}
+</table>
