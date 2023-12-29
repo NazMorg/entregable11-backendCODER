@@ -1,11 +1,12 @@
 import { cartsService } from '../services/carts.service.js'
+import { errorMessages } from '../middlewares/error.enum.js';
 
 class CartsController {
     findAllCarts = async (req, res) => {
         try {
             const carts = await cartsService.findAll()
             if (!carts) {
-                res.status(400).json({ message: "No se encontraron carritos" });
+                res.status(400).json({ message: errorMessages.CARTS_NOT_FOUND });
             }
             return res.status(200).json({ message: "Carritos encontrados", carts: carts });
         } catch (error) {
@@ -18,7 +19,7 @@ class CartsController {
         try {
             const cartById = await cartsService.findAndPopulate(cartId)
             if (!cartById) {
-                res.status(400).json({ message: "No se encontro el carrito" });
+                res.status(400).json({ message: errorMessages.CART_NOT_FOUND });
             }
             return res.status(200).json({ message: "Carrito encontrado", cart: cartById });
         } catch (error) {
@@ -32,7 +33,7 @@ class CartsController {
         try {
             const newCart = await cartsService.createOne(obj)
             if (!newCart) {
-                res.status(400).json({ message: "No se pudo crear el carrito" });
+                res.status(400).json({ message: errorMessages.CART_NOT_CREATED });
             }
             return res.status(200).json({ message: "Carrito creado", cart: newCart });
         } catch (error) {
@@ -46,7 +47,7 @@ class CartsController {
         try {
             const updatedCart = await cartsService.addToCart(cartId, productsData)
             if (!updatedCart) {
-                res.status(400).json({ message: "No se pudo actualizar el carrito" });
+                res.status(400).json({ message: errorMessages.PRODUCT_NOT_ADDED });
             }
             return res.status(200).json({ message: "Carrito actualizado", cart: updatedCart });
         } catch (error) {
@@ -59,7 +60,7 @@ class CartsController {
         try {
             const emptyCart = await cartsService.deleteAllProducts(cartId)
             if (!emptyCart) {
-                res.status(400).json({ message: "No se pudo vaciar el carrito" });
+                res.status(400).json({ message: errorMessages.CART_NOT_CLEARED });
             }
             return res.status(200).json({ message: "Productos eliminados del carrito", cart: emptyCart });
         } catch (error) {
@@ -74,7 +75,7 @@ class CartsController {
         try {
             const cartUpdate = await cartsService.updateProductQuantity(cartId, productId, quantity)
             if (!cartUpdate) {
-                res.status(400).json({ message: "No se pudo actualizar la cantidad" });
+                res.status(400).json({ message: errorMessages.QUANTITY_NOT_UPDATED });
             }
             return res.status(200).json({ message: "Cantidad Actualizada", cart: cartUpdate });
         } catch (error) {
@@ -88,7 +89,7 @@ class CartsController {
         try {
             const cartUpdate = await cartsService.deleteOneProduct(cartId, productId)
             if (!cartUpdate) {
-                res.status(400).json({ message: "No se pudo eliminar el producto" });
+                res.status(400).json({ message: errorMessages.PRODUCT_NOT_DELETED });
             }
             return res.status(200).json({ message: "Producto eliminado", cart: cartUpdate });
         } catch (error) {

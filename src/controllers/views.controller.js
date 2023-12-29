@@ -1,6 +1,5 @@
 import { productsService } from '../services/products.service.js';
 import { cartsService } from '../services/carts.service.js';
-import { logger } from '../winston.js';
 
 class ViewsController {
     loginRender = (req, res) => {
@@ -48,25 +47,15 @@ class ViewsController {
     }
 
     createProductRender = (req, res) => {
-        res.render('createProduct');
+        res.render('createProduct'); 
     }
 
     updateProductRender = (req, res) => {
-        res.render('updateProduct');
+        res.render('updateProduct'); 
     }
 
     deleteProductRender = (req, res) => {
-        res.render('deleteProduct');
-    }
-
-    loggerTest = (req, res) => {
-        logger.fatal("FATAL")
-        logger.error("ERROR")
-        logger.warning("WARNING")
-        logger.info("INFO")
-        logger.http("HTTP")
-        logger.debug("DEBUG")
-        res.status(400).json({ message: "Testeo de logger en consola" });
+        res.render('deleteProduct'); 
     }
 
 }

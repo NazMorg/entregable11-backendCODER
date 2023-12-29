@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { viewsController } from '../controllers/views.controller.js';
+import { productsController } from '../controllers/products.controller.js';
 import { checkUserRole } from '../middlewares/auth.middleware.js';
 
 const router = Router();
@@ -24,6 +25,6 @@ router.get("/updateproduct", checkUserRole("admin"), viewsController.updateProdu
 
 router.get("/deleteproduct", checkUserRole("admin"), viewsController.deleteProductRender)
 
-router.get("/loggerTest", viewsController.loggerTest)
+router.get("/mockingproducts", productsController.productsMock)
 
 export default router;

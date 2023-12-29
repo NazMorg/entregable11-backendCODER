@@ -5,7 +5,6 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as GithubStrategy } from 'passport-github2';
 import { hashData, compareData } from '../utils.js';
 import config from '../config/config.js';
-import { logger } from '../winston.js'
 
 passport.use("signup", new LocalStrategy(
     {
@@ -35,8 +34,9 @@ passport.use("login", new LocalStrategy(
     },
     async (email, password, done) => {
         try {
+            //console.log("email: ", email)
             const userFound = await usersMongo.findByEmail(email);
-            logger.debug(userFound)
+            console.log(userFound)
             if (!userFound) {
                 return done(null, false);
             }
